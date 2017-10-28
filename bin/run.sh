@@ -3,7 +3,7 @@
 GID=${GID:-991}
 UID=${UID:-991}
 DOMAIN=${DOMAIN:-$(hostname --domain)}
-DBHOST=${DBHOST:-mariadb}
+DBHOST=${DBHOST:-postgresql}
 DBUSER=${DBUSER:-postfix}
 DBNAME=${DBNAME:-postfix}
 DBPASS=$([ -f "$DBPASS" ] && cat "$DBPASS" || echo "${DBPASS:-}")
@@ -15,7 +15,7 @@ PASSVAL_MIN_CHAR=${PASSVAL_MIN_CHAR:-3}
 PASSVAL_MIN_DIGIT=${PASSVAL_MIN_DIGIT:-2}
 
 if [ -z "$DBPASS" ]; then
-  echo "Mariadb database password must be set !"
+  echo "PostgreSQL database password must be set!"
   exit 1
 fi
 
@@ -30,7 +30,7 @@ cat > /postfixadmin/config.local.php <<EOF
 <?php
 \$CONF['configured'] = true;
 
-\$CONF['database_type'] = 'mysqli';
+\$CONF['database_type'] = 'pgsql';
 \$CONF['database_host'] = '${DBHOST}';
 \$CONF['database_user'] = '${DBUSER}';
 \$CONF['database_password'] = '${DBPASS}';
