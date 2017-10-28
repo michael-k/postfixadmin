@@ -11,7 +11,7 @@ PostfixAdmin is a web based interface used to manage mailboxes, virtual domains 
 - Lightweight & secure image (no root process)
 - Based on Alpine Linux
 - Latest Postfixadmin version (3.2)
-- MariaDB/PostgreSQL driver
+- PostgreSQL driver
 - With PHP7
 
 ### Built-time variables
@@ -31,8 +31,7 @@ PostfixAdmin is a web based interface used to manage mailboxes, virtual domains 
 | -------- | ----------- | ---- | ------------- |
 | **UID** | postfixadmin user id | *optional* | 991
 | **GID** | postfixadmin group id | *optional* | 991
-| **DBDRIVER** | Database type: mysql, pgsql | *optional* | mysql
-| **DBHOST** | Database instance ip/hostname | *optional* | mariadb
+| **DBHOST** | Database instance ip/hostname | *optional* | postgresql
 | **DBPORT** | Database instance port | *optional* | 3306
 | **DBUSER** | Database database username | *optional* | postfix
 | **DBNAME** | Database database name | *optional* | postfix
@@ -61,7 +60,7 @@ postfixadmin:
     - DBPASS=xxxxxxx
   depends_on:
     - mailserver
-    - mariadb # postgres (adjust accordingly)
+    - postgresql
 ```
 
 ### How to setup

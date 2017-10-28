@@ -3,9 +3,9 @@
 GID=${GID:-991}
 UID=${UID:-991}
 DOMAIN=${DOMAIN:-$(hostname -d)}
-DBDRIVER=${DBDRIVER:-mysql}
-DBHOST=${DBHOST:-mariadb}
-DBPORT=${DBPORT:-3306}
+DBDRIVER="pgsql"
+DBHOST=${DBHOST:-postgresql}
+DBPORT=${DBPORT:-5432}
 DBUSER=${DBUSER:-postfix}
 DBNAME=${DBNAME:-postfix}
 DBPASS=$([ -f "$DBPASS" ] && cat "$DBPASS" || echo "${DBPASS:-}")
@@ -21,7 +21,7 @@ PAGE_SIZE=${PAGE_SIZE:-10}
 QUOTA_MULTIPLIER=${QUOTA_MULTIPLIER:-1024000}
 
 if [ -z "$DBPASS" ]; then
-  echo "MariaDB/PostgreSQL database password must be set !"
+  echo "PostgreSQL database password must be set!"
   exit 1
 fi
 
@@ -30,11 +30,6 @@ mkdir -p /postfixadmin/templates_c
 
 # Set permissions
 chown -R $UID:$GID /postfixadmin
-
-# MySQL/MariaDB should use mysqli driver
-case "$DBDRIVER" in
-  mysql) DBDRIVER=mysqli;
-esac
 
 # Local postfixadmin configuration file
 cat > /postfixadmin/config.local.php <<EOF

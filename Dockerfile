@@ -25,7 +25,6 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.8/community" >> /etc/a
     php7-fpm@community \
     php7-imap@community \
     php7-pgsql@community \
-    php7-mysqli@community \
     php7-session@community \
     php7-mbstring@community \
  && cd /tmp \
