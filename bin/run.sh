@@ -71,6 +71,8 @@ cat > /postfixadmin/config.local.php <<EOF
     '/([a-zA-Z].*){${PASSVAL_MIN_CHAR}}/'    => 'password_no_characters ${PASSVAL_MIN_CHAR}',
     '/([0-9].*){${PASSVAL_MIN_DIGIT}}/'      => 'password_no_digits ${PASSVAL_MIN_DIGIT}',
 );
+
+\$CONF['recipient_delimiter'] = '+';
 ?>
 EOF
 # RUN !
