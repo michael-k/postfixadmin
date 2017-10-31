@@ -49,10 +49,10 @@ cat > /postfixadmin/config.local.php <<EOF
 \$CONF['footer_text'] = 'Return to ${DOMAIN}';
 \$CONF['footer_link'] = 'http://${DOMAIN}';
 \$CONF['default_aliases'] = array (
-  'abuse'      => 'abuse@${DOMAIN}',
-  'hostmaster' => 'hostmaster@${DOMAIN}',
+  'abuse'      => 'postmaster@${DOMAIN}',
+  'hostmaster' => 'postmaster@${DOMAIN}',
   'postmaster' => 'postmaster@${DOMAIN}',
-  'webmaster'  => 'webmaster@${DOMAIN}'
+  'webmaster'  => 'postmaster@${DOMAIN}'
 );
 
 \$CONF['quota'] = 'YES';
