@@ -80,6 +80,7 @@ cat > /postfixadmin/config.local.php <<EOF
 );
 
 \$CONF['page_size'] = '${PAGE_SIZE}';
+\$CONF['recipient_delimiter'] = '+';
 ?>
 EOF
 
