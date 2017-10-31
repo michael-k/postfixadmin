@@ -81,6 +81,10 @@ cat > /postfixadmin/config.local.php <<EOF
 
 \$CONF['page_size'] = '${PAGE_SIZE}';
 \$CONF['recipient_delimiter'] = '+';
+
+if (file_exists(dirname(__FILE__) . '/config.custom.php')) {
+    require_once(dirname(__FILE__) . '/config.custom.php');
+}
 ?>
 EOF
 
