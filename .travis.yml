@@ -1,0 +1,10 @@
+language: bash
+sudo: required
+services:
+  - docker
+
+install:
+  - docker build --no-cache -t hardware/postfixadmin:testing .
+
+script:
+  - test "$(docker run --rm --name postfixadmin hardware/postfixadmin:testing)" = "Mariadb database password must be set!"

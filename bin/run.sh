@@ -11,7 +11,7 @@ SMTPHOST=${SMTPHOST:-mailserver}
 ENCRYPTION=${ENCRYPTION:-"dovecot:SHA512-CRYPT"}
 
 if [ -z "$DBPASS" ]; then
-  echo "Mariadb database password must be set !"
+  echo "Mariadb database password must be set!"
   exit 1
 fi
 
