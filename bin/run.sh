@@ -19,6 +19,10 @@ if [ -z "$DBPASS" ]; then
   exit 1
 fi
 
+sed -i "s#;\(date.timezone =\)#\1 \"${TIMEZONE:-UTC}\"#" /etc/php7/php.ini
+sed -i "s#;\(session.cookie_secure =\)#\1 True#" /etc/php7/php.ini
+sed -i "s#\(session.cookie_httponly =\)#\1 True#" /etc/php7/php.ini
+
 # Create smarty cache folder
 mkdir -p /postfixadmin/templates_c
 
