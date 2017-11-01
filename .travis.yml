@@ -8,3 +8,26 @@ install:
 
 script:
   - test "$(docker run --rm --name postfixadmin hardware/postfixadmin:testing)" = "Mariadb database password must be set!"
+
+  - docker run --rm -d -e DBPASS=testpasswd --name postfixadmin hardware/postfixadmin:testing
+  - export PHP_VERSION=$(docker exec postfixadmin php --version | grep "^PHP " | awk '{ print $2 }')
+  - export CONTAINER_IP="$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postfixadmin)"
+
+  - test "$(curl -I ${CONTAINER_IP}:8888 | grep -v "^Date:" | sed 's/\r//')" = "HTTP/1.1 302 Found
+Host: ${CONTAINER_IP}:8888
+Connection: close
+X-Powered-By: PHP/${PHP_VERSION}
+Location: login.php
+Content-type: text/html; charset=UTF-8"
+
+  - test "$(curl -I ${CONTAINER_IP}:8888/login.php | grep -v -E '^(Date|Expires):' | sed 's/\(Set-Cookie: postfixadmin_session=\)[^;]*/\1/')" = "HTTP/1.1 200 OK
+Host: ${CONTAINER_IP}:8888
+Connection: close
+X-Powered-By: PHP/${PHP_VERSION}
+Set-Cookie: postfixadmin_session=; path=/
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Content-type: text/html; charset=UTF-8"
+
+after_script:
+  - docker stop postfixadmin
